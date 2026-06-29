@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Note from "./components/Note"
 import Form from "./components/Form"
 import LoginForm from "./components/LoginForm"
@@ -11,6 +11,8 @@ const App = () => {
   
   const [notes, setNotes] = useState([])
   const [user, setUser] = useState(null)
+
+  const noteFormRef = useRef()
 
 
   // to load the screen with existing notes data, were going to make a Http get request with the axious library 
@@ -55,6 +57,7 @@ const App = () => {
   }
 
   const addNote = (noteObject) => {
+    noteFormRef.current.toggleVisibility()
     noteService
       .create(noteObject)
       .then(returnedNote => {
@@ -87,7 +90,7 @@ const App = () => {
   )
   
   const showNoteForm = () => (
-    <Togglable buttonLabel= 'new note'>
+    <Togglable buttonLabel= 'new note' ref={noteFormRef}>
       <NoteForm createNote={addNote}/>
     </Togglable>
   )
