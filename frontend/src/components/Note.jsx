@@ -1,7 +1,7 @@
 const Note = ({content, deleteNote}) => {
 
     return (
-        <li>{content} <button onClick={deleteNote}>delete</button> </li>
+        <li className="note">{content} <button onClick={deleteNote}>delete</button> </li>
     )
 
 }
